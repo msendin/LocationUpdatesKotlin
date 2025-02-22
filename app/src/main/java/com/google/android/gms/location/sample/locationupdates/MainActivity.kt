@@ -432,7 +432,14 @@ class MainActivity : AppCompatActivity() {
         // It is a good practice to remove location requests when the activity is in a paused or
         // stopped state. Doing so helps battery performance and is especially
         // recommended in applications that request frequent location updates.
-        mFusedLocationClient.removeLocationUpdates(mLocationCallback)
+        mLocationCallback.let {
+            mFusedLocationClient.removeLocationUpdates(it).addOnCompleteListener {
+                mRequestingLocationUpdates = false
+                setButtonsEnabledState()
+            }
+            mRequestingLocationUpdates = false
+            setButtonsEnabledState()
+        }
         mRequestingLocationUpdates = false
         setButtonsEnabledState()
     }
