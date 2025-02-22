@@ -260,14 +260,14 @@ class MainActivity : AppCompatActivity() {
      * updates.
      */
     private fun createLocationRequest() {
-        mLocationRequest = LocationRequest.Builder(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS)
-            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+        mLocationRequest = LocationRequest.Builder(
+            Priority.PRIORITY_HIGH_ACCURACY, 100
+        )
             .setWaitForAccurateLocation(false)
-            .setMinUpdateIntervalMillis(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS)
-            .setMaxUpdateDelayMillis(UPDATE_INTERVAL_IN_MILLISECONDS)
+            .setMinUpdateIntervalMillis(3000)
+            .setMaxUpdateDelayMillis(100)
             .build()
-
-
+            
         // Sets the desired interval for active location updates. This interval is
         // inexact. You may not receive updates at all if no location sources are available, or
         // you may receive them slower than requested. You may also receive updates faster than
